@@ -1,0 +1,294 @@
+
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h4>Company</h4>
+            <div [hidden]="formDisplay">
+                <form action="" [formGroup]="companyForm">
+                    <p-tabView [activeIndex]="index" (onChange)="function($event)">
+                        <p-tabPanel header="General Info">
+                            <div class="col-12">
+                                <div class="p-fluid p-formgrid grid">
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Company Code" tooltipPosition="top">Company Code<span class="req">*</span></label>
+                                        <input pInputText id="firstname2" type="text" formControlName="company_code" placeholder="<<Auto Generate>>" pInputText disabled />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Country of Domicile" tooltipPosition="top">Company Group<span class="req">*</span></label>
+                                        <p-dropdown [options]="allCompanyGroup" formControlName="company_group_id" [ngClass]="{ 'is-invalid': submitted && f.company_group_id.errors }" placeholder="---Select---"
+                                                    optionLabel="company_group_name" optionValue="company_group_id" [showClear]="true" [filter]="true" filterBy="company_group_name"></p-dropdown>
+
+                                        <div *ngIf="submitted && f.company_group_id.errors" class="invalid-feedback">
+                                            <small *ngIf="f.company_group_id.errors.required" class="p-error">Company group is required</small>
+                                        </div>
+                                    </div>
+                                    <div class="field form-group col-12 md:col-6">
+                                        <label pTooltip="Company Name" tooltipPosition="top">Company Name<span class="req">*</span> </label>
+                                        <input id="lastname2" type="text" class="from-control" formControlName="company_name"
+                                               [ngClass]="{ 'is-invalid': submitted && f.company_name.errors }"
+                                               placeholder="" pInputText required />
+
+                                        <div *ngIf="submitted && f.company_name.errors" class="invalid-feedback">
+                                            <small *ngIf="f.company_name.errors.required" class="p-error">Company name is required</small>
+
+                                        </div>
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label htmlFor="lastname2" pTooltip="Company Prefix" tooltipPosition="top">Prefix<span class="req">*</span> </label>
+                                        <input pInputText id="lastname2" type="text" formControlName="company_prefix" [ngClass]="{ 'is-invalid': submitted && f.company_prefix.errors }" placeholder="" pInputText maxlength="1" style="text-transform: uppercase" pKeyFilter="alpha" />
+
+                                        <div *ngIf="submitted && f.company_prefix.errors" class="invalid-feedback">
+                                            <small *ngIf="f.company_prefix.errors.required" class="p-error">Company prefix is required</small>
+                                        </div>
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Short Name" tooltipPosition="top"> Short Name<span class="req">*</span> </label>
+                                        <input id="lastname2" type="text" formControlName="company_short_name" [ngClass]="{ 'is-invalid': submitted && f.company_short_name.errors }" placeholder="" pInputText required />
+
+                                        <div *ngIf="submitted && f.company_short_name.errors" class="invalid-feedback">
+                                            <small *ngIf="f.company_short_name.errors.required" class="p-error">Company short name is required</small>
+                                        </div>
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Name In Local" tooltipPosition="top">Name In Local </label>
+                                        <input id="lastname2" type="text" formControlName="name_in_local_language" placeholder="" pInputText />
+                                    </div>
+
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Country of Domicile" tooltipPosition="top">Currency<span class="req">*</span></label>
+                                        <p-dropdown [options]="allCurrency" formControlName="currency_id" [ngClass]="{ 'is-invalid': submitted && f.currency_id.errors }" placeholder="---Select---"
+                                                    optionLabel="currency_name" optionValue="currency_id" [showClear]="true" [filter]="true" filterBy="currency_name"></p-dropdown>
+
+                                        <div *ngIf="submitted && f.currency_id.errors" class="invalid-feedback">
+                                            <small *ngIf="f.currency_id.errors.required" class="p-error">Currency is required</small>
+                                        </div>
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Phone" tooltipPosition="top">Phone </label>
+                                        <input id="lastname2" type="text" formControlName="phone" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Email" tooltipPosition="top">Email </label>
+                                        <input id="lastname2" type="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="" pInputText />
+                                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                            <small *ngIf="f.email.errors.email" class="p-error">Email must be a valid email address</small>
+                                        </div>
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Web" tooltipPosition="top">Web </label>
+                                        <input id="lastname2" type="text" formControlName="web_url" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Slogan" tooltipPosition="top">Slogan </label>
+                                        <input id="lastname2" type="text" formControlName="slogan" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Remarks" tooltipPosition="top">Remarks </label>
+                                        <input id="lastname2" type="text" formControlName="remarks" placeholder="" pInputText />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-content-end pr-2">
+                                <button pButton pRipple type="button" (click)="onGeneral()" label="Next" class="risBtn  mr-2 mb-2" icon="pi pi-step-forward"></button>
+                                <button pButton pRipple type="button" (click)="toggleFormClose()" label="Close" class="risBtn risClose mr-2 mb-2" icon="pi pi-times"></button>
+                            </div>
+                        </p-tabPanel>
+                        <p-tabPanel header="Address Info">
+                            <div class="col-12">
+                                <div class="p-fluid p-formgrid grid">
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Country of Domicile" tooltipPosition="top">CoD<span class="req">*</span></label>
+                                        <p-dropdown [options]="allCountry" formControlName="country_id" [ngClass]="{ 'is-invalid': submitted && f.country_id.errors }" placeholder="---Select---"
+                                                    optionLabel="country_name" optionValue="country_id" (onChange)="onSelectByCountryId($event.value)" [showClear]="true" [filter]="true" filterBy="country_name"></p-dropdown>
+
+                                        <div *ngIf="submitted && f.country_id.errors" class="invalid-feedback">
+                                            <small *ngIf="f.country_id.errors.required" class="p-error">CoD is required</small>
+                                        </div>
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Division" tooltipPosition="top">Division</label>
+                                        <p-dropdown [options]="allDivision" formControlName="division_id" placeholder="---Select---"
+                                                    optionLabel="division_name" optionValue="division_id" (onChange)="onSelectByDivisionId($event.value)" [showClear]="true" [filter]="true" filterBy="division_name"></p-dropdown>
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="District" tooltipPosition="top">District</label>
+                                        <p-dropdown [options]="allDistrict" formControlName="district_id" placeholder="---Select---"
+                                                    optionLabel="district_name" optionValue="district_id" (onChange)="onSelectByDistrictId($event.value)" [showClear]="true" [filter]="true" filterBy="district_name"></p-dropdown>
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Police Station" tooltipPosition="top">PS/Area</label>
+                                        <p-dropdown [options]="allThana" formControlName="thana_id" placeholder="---Select---"
+                                                    optionLabel="thana_name" optionValue="thana_id" [showClear]="true" [filter]="true" filterBy="thana_name"></p-dropdown>
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="City/Town" tooltipPosition="top">City/Town </label>
+                                        <input id="lastname2" type="text" formControlName="city" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Post Code" tooltipPosition="top">Post Code </label>
+                                        <input id="lastname2" type="text" formControlName="post_code" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Block" tooltipPosition="top">Block </label>
+                                        <input id="lastname2" type="text" formControlName="block" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Road No" tooltipPosition="top">Road No </label>
+                                        <input id="lastname2" type="text" formControlName="road_no" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="House No" tooltipPosition="top">House No </label>
+                                        <input id="lastname2" type="text" formControlName="house_no" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Flat No" tooltipPosition="top">Flat No </label>
+                                        <input id="lastname2" type="text" formControlName="flat_no" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Address Note" tooltipPosition="top">Address Note </label>
+                                        <input id="lastname2" type="text" formControlName="address_note" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Address In Local" tooltipPosition="top">Address In Local </label>
+                                        <input id="lastname2" type="text" formControlName="address_in_local_language" placeholder="" pInputText />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-content-end pr-2">
+                                <button pButton pRipple type="button" (click)="openPrev()" label="Previous" class="risBtn  mr-2 mb-2" icon="pi pi-step-backward"></button>
+                                <button pButton pRipple type="button" (click)="onAddress()" label="Next" class="risBtn  mr-2 mb-2" icon="pi pi-step-forward"></button>
+                                <button pButton pRipple type="button" (click)="toggleFormClose()" label="Close" class="risBtn risClose mr-2 mb-2" icon="pi pi-times"></button>
+                            </div>
+                        </p-tabPanel>
+                        <p-tabPanel header="Registration Info">
+                            <div class="col-12">
+                                <div class="p-fluid p-formgrid grid">
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Company Reg No" tooltipPosition="top">Company Reg No </label>
+                                        <input id="lastname2" type="text" formControlName="company_reg_no" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Company Reg Date" tooltipPosition="top">Reg Date</label>
+                                        <p-calendar formControlName="company_reg_date" placeholder="" [showIcon]="true" [showButtonBar]="true"></p-calendar>
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Company TIN No" tooltipPosition="top">Company TIN No </label>
+                                        <input id="lastname2" type="text" formControlName="company_tin_no" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Company TIN Date" tooltipPosition="top">TIN Date</label>
+                                        <p-calendar formControlName="company_tin_date" placeholder="" [showIcon]="true" [showButtonBar]="true"></p-calendar>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-content-end pr-2">
+                                <button pButton pRipple type="button" (click)="openPrev()" label="Previous" class="risBtn  mr-2 mb-2" icon="pi pi-step-backward"></button>
+                                <button pButton pRipple type="button" (click)="openNext()" label="Next" class="risBtn  mr-2 mb-2" icon="pi pi-step-forward"></button>
+                                <button pButton pRipple type="button" (click)="toggleFormClose()" label="Close" class="risBtn risClose mr-2 mb-2" icon="pi pi-times"></button>
+                            </div>
+                        </p-tabPanel>
+                        <p-tabPanel header="Upload Info">
+                            <div class="col-12">
+                                <div class="p-fluid p-formgrid grid">
+                                </div>
+                            </div>
+                            <div class="p-fluid grid col-12 flex justify-content-end flex-wrap card-container">
+                                <!---------------------dd---------------------------->
+
+                                <div class="p-fluid grid col-6 flex justify-content-start flex-wrap card-container">
+                                    <div class="col-4 mt-2 text-right">
+                                        <label pTooltip="Company Logo" tooltipPosition="top" class=" d-md-inline-flex">Company Logo:</label>
+                                    </div>
+                                    <div class="col-8 p-fluid">
+                                        <span class="p-float-label">
+                                            <div class="flex grid ">
+                                                <div class=" inputWrapper photo-signature align-self-end flex align-items-center justify-content-center">
+                                                    <img class="risBtn m-1" [src]="photourllink" style="width: 150px;" alt="">
+                                                    <input type="file" formControlName="logo" class="fileInput risBtn risAdd " style="width: 150px;" #userImage (change)="onSelectImage($event)">
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="p-fluid grid col-6 flex justify-content-start flex-wrap card-container">
+                                    <div class="col-4 mt-2 text-right">
+                                        <label pTooltip="Company Reg File" tooltipPosition="top" class=" d-md-inline-flex">Company Reg File :</label>
+                                    </div>
+                                    <div class="col-8 p-fluid">
+                                        <span class="p-float-label">
+                                            <div class="flex grid ">
+                                                <div class=" inputWrapper photo-signature align-self-end flex align-items-center justify-content-center">
+                                                    <img class="risBtn m-1" [src]="photourllink" style="width: 150px;" alt="">
+                                                    <input type="file" formControlName="company_reg_file_path" class="fileInput risBtn risAdd " style="width: 150px;" #userImage (change)="onSelectImage($event)">
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid grid col-6 flex justify-content-start flex-wrap card-container">
+                                    <div class="col-4 mt-2 text-right">
+                                        <label pTooltip="Company TIN File" tooltipPosition="top" class=" d-md-inline-flex">Company TIN File :</label>
+                                    </div>
+                                    <div class="col-8 p-fluid">
+                                        <span class="p-float-label">
+                                            <div class="flex grid ">
+                                                <div class=" inputWrapper photo-signature align-self-end flex align-items-center justify-content-center">
+                                                    <img class="risBtn m-1" [src]="photourllink" style="width: 150px;" alt="">
+                                                    <input type="file" formControlName="company_tin_file_path" class="fileInput risBtn risAdd " style="width: 150px;" #userImage (change)="onSelectImage($event)">
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex justify-content-end pr-2">
+                                <button pButton pRipple type="button" (click)="openPrev()" label="Previous" class="risBtn mr-2 mb-2" icon="pi pi-step-backward"></button>
+                                <button pButton pRipple type="button" (click)="onFormSubmit()" label="Save" class="risBtn risSave mr-2 mb-2" icon="pi pi-check"></button>
+                                <button pButton pRipple type="button" (click)="toggleFormClose()" label="Close" class="risBtn risClose mr-2 mb-2" icon="pi pi-times"></button>
+                            </div>
+                        </p-tabPanel>                        
+                    </p-tabView>
+                </form>
+            </div>
+
+            <!--end form display------------->
+
+            <div [hidden]="gridDisplay">
+                <button pButton pRipple type="button" (click)="showBasicDialog()" label="New" icon="pi pi-plus" class="risBtn risAdd mr-2 mb-2"></button>
+                <button pButton pRipple type="button" (click)="loadCompanyToEdit()" label="Edit" icon="pi pi-pencil" class="risBtn risEdit mr-2 mb-2"></button>
+                <button pButton pRipple type="button" (click)="showDialog()" label="Delete" icon="pi pi-trash" class="risBtn risDelete mr-2 mb-2"></button>
+                <p-dialog header="Delete Record" [(visible)]="display" [style]="{width: '35vw'}">
+                    <p>Do you want to delete this record?</p>
+                    <ng-template pTemplate="footer">
+                        <button class="pi pi-times risBtn risClose" (click)="display=false"> No</button>
+                        <button class="pi pi-check risBtn risSave" (click)="deleteCompanyInfo()"> Yes</button>
+                    </ng-template>
+                </p-dialog>
+
+                <p-table [value]="companys" styleClass="p-datatable-striped p-datatable-gridlines p-datatable-sm" [paginator]="true" [rows]="10" selectionMode="single" [showCurrentPageReport]="true" responsiveLayout="scroll"
+                         [(selection)]="selectedCompany" dataKey="company_id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Company Code</th>
+                            <th>Company Name</th>
+                            <th>Company Short Name</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-company>
+                        <tr [pSelectableRow]="company">
+                            <td>{{company.company_code}}</td>
+                            <td>{{company.company_name}}</td>
+                            <td>{{company.company_short_name}}</td>
+                            <td>{{company.remarks}}</td>
+
+                        </tr>
+                    </ng-template>
+
+                </p-table>
+                <!--end grid display -------------->
+            </div>
+        </div>
+    </div>
+</div>

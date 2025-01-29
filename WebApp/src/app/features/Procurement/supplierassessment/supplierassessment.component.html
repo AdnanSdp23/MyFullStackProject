@@ -1,0 +1,891 @@
+
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h4>Assessment Form</h4>
+            <div [hidden]="formDisplay">
+                <p-tabView [activeIndex]="index" (onChange)="function($event)">
+                    <p-tabPanel header="Basic Info">
+                        <form action="" [formGroup]="supplierApplicationForm">
+                            <div class="col-12">
+                                <div class="p-fluid p-formgrid grid">
+
+                                    <div class="col-12">
+                                        <div class="p-fluid p-formgrid grid">
+                                            <div class="field col-12 md:col-6">
+                                                <label pTooltip="Supplier Code" tooltipPosition="top">Supplier Code :</label>
+                                                <input pInputText type="text" formControlName="supplier_code" placeholder="<<Auto Generate>>" pInputText disabled />
+                                            </div>
+                                            <div class="field col-12 md:col-6">
+                                                <label pTooltip="Organizational Logo" tooltipPosition="top">Organizational Logo </label>
+                                                <div class=" inputWrapper col-6 photo-signature align-self-start flex align-items-center justify-content-center ">
+                                                    <img class="risBtn m-1" [src]="photourllink" style="width: 100px;" alt="">
+                                                    <!--<input type="file" formControlName="logo_path" class="fileInput risBtn risAdd " style="width: 100px;" #userImage (change)="onSelectImage($event)">-->
+                                                    <input type="file" class="fileInput risBtn risAdd " style="width: 150px;" #supplierImage (change)="onSelectImage($event)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="field form-group col-12 md:col-6">
+                                        <label pTooltip="Legal Name" tooltipPosition="top">Legal Name<span class="req">*</span> </label>
+                                        <input type="text" class="from-control" formControlName="legal_name"
+                                               [ngClass]="{ 'is-invalid': submittedBasic && a.legal_name.errors }"
+                                               placeholder="" pInputText required />
+                                        <div *ngIf="submittedBasic && a.legal_name.errors" class="invalid-feedback">
+                                            <small *ngIf="a.legal_name.errors.required" class="p-error">Legal Name is required</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="field form-group col-12 md:col-6">
+                                        <label pTooltip="Short Name" tooltipPosition="top">Short Name<span class="req">*</span> </label>
+                                        <input type="text" class="from-control" formControlName="short_name"
+                                               [ngClass]="{ 'is-invalid': submittedBasic && a.short_name.errors }"
+                                               placeholder="" pInputText required />
+                                        <div *ngIf="submittedBasic && a.short_name.errors" class="invalid-feedback">
+                                            <small *ngIf="a.short_name.errors.required" class="p-error">Short Name is required</small>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="field form-group col-12 md:col-6">
+                                        <label pTooltip="Year Established" tooltipPosition="top">Year Established<span class="req">*</span> </label>
+                                        <p-calendar [showIcon]="true" formControlName="year_established" placeholder="" selectOtherMonths="true" inputId="navigators" showButtonBar="true" [monthNavigator]="true"
+                                                    [yearNavigator]="true" yearRange="2000:2030" dateFormat="dd/mm/yy"></p-calendar>
+                                        <div *ngIf="submittedBasic && a.year_established.errors" class="invalid-feedback">
+                                            <small *ngIf="a.year_established.errors.required" class="p-error">Year Established is required</small>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Country of Domicile" tooltipPosition="top">Domicile<span class="req">*</span></label>
+                                        <p-dropdown [options]="allDomicile" formControlName="domicile_enum_id"
+                                                    [ngClass]="{ 'is-invalid': submittedBasic && a.domicile_enum_id.errors }" placeholder="---Select---"
+                                                    optionLabel="domicile_enum_name" optionValue="domicile_enum_id" [showClear]="true" [filter]="true" filterBy="domicile_enum_name"></p-dropdown>
+
+                                        <div *ngIf="submittedBasic && a.domicile_enum_id.errors" class="invalid-feedback">
+                                            <small *ngIf="a.domicile_enum_id.errors.required" class="p-error">Domicile Name is required</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Registry Authority" tooltipPosition="top">Registry Authority<span class="req">*</span></label>
+                                        <p-dropdown [options]="allRegistryAuthority" formControlName="registry_authority_id"
+                                                    [ngClass]="{ 'is-invalid': submittedBasic && a.registry_authority_id.errors }" placeholder="---Select---"
+                                                    optionLabel="registry_authority_name" optionValue="registry_authority_id" [showClear]="true" [filter]="true" filterBy="registry_authority_name"></p-dropdown>
+
+                                        <div *ngIf="submittedBasic && a.registry_authority_id.errors" class="invalid-feedback">
+                                            <small *ngIf="a.registry_authority_id.errors.required" class="p-error">Registry Authority Name is required</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Regulator" tooltipPosition="top">Regulator<span class="req">*</span></label>
+                                        <p-dropdown [options]="allRegulator" formControlName="regulator_id"
+                                                    [ngClass]="{ 'is-invalid': submittedBasic && a.regulator_id.errors }" placeholder="---Select---"
+                                                    optionLabel="regulator_name" optionValue="regulator_id" [showClear]="true" [filter]="true" filterBy="regulator_name"></p-dropdown>
+
+                                        <div *ngIf="submittedBasic && a.regulator_id.errors" class="invalid-feedback">
+                                            <small *ngIf="a.regulator_id.errors.required" class="p-error">Regulator Name is required</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Ownership Type" tooltipPosition="top">Ownership Type<span class="req">*</span></label>
+                                        <p-dropdown [options]="allOwnershipType" formControlName="ownership_type_id"
+                                                    [ngClass]="{ 'is-invalid': submittedBasic && a.ownership_type_id.errors }" placeholder="---Select---"
+                                                    optionLabel="ownership_type_name" optionValue="ownership_type_id" [showClear]="true" [filter]="true" filterBy="ownership_type_name"></p-dropdown>
+
+                                        <div *ngIf="submittedBasic && a.ownership_type_id.errors" class="invalid-feedback">
+                                            <small *ngIf="a.ownership_type_id.errors.required" class="p-error">Ownership Type Name is required</small>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Name In Local Language" tooltipPosition="top">Name In Local Language </label>
+                                        <input type="text" formControlName="name_in_local_language" placeholder="" pInputText />
+                                    </div>
+
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Address In Local Language" tooltipPosition="top">Address In Local Language </label>
+                                        <input type="text" formControlName="address_in_local_language" placeholder="" pInputText />
+                                    </div>
+
+                                    <br />
+
+                                    <p style="border-top:2px solid blue; width: 100%; margin:20px 0px 10px 0px;"></p>
+
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Country" tooltipPosition="top">Country<span class="req">*</span></label>
+                                        <p-dropdown [options]="allCountry" formControlName="country_id" [ngClass]="{ 'is-invalid': submittedBasic && a.country_id.errors }" placeholder="---Select---"
+                                                    optionLabel="country_name" optionValue="country_id" (onChange)="onSelectByCountryId($event.value)" [showClear]="true" [filter]="true" filterBy="country_name"></p-dropdown>
+
+                                        <div *ngIf="submittedBasic && a.country_id.errors" class="invalid-feedback">
+                                            <small *ngIf="a.country_id.errors.required" class="p-error">Country is required</small>
+                                        </div>
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Division" tooltipPosition="top">Division<span class="req">*</span></label>
+                                        <p-dropdown [options]="allDivision" formControlName="division_id" [ngClass]="{ 'is-invalid': submittedBasic && a.division_id.errors }" placeholder="---Select---"
+                                                    optionLabel="division_name" optionValue="division_id" (onChange)="onSelectByDivisionId($event.value)" [showClear]="true" [filter]="true" filterBy="division_name"></p-dropdown>
+
+                                        <div *ngIf="submittedBasic && a.division_id.errors" class="invalid-feedback">
+                                            <small *ngIf="a.division_id.errors.required" class="p-error">Division is required</small>
+                                        </div>
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="District" tooltipPosition="top">District<span class="req">*</span></label>
+                                        <p-dropdown [options]="allDistrict" formControlName="district_id" [ngClass]="{ 'is-invalid': submittedBasic && a.district_id.errors }" placeholder="---Select---"
+                                                    optionLabel="district_name" optionValue="district_id" [showClear]="true" [filter]="true" filterBy="district_name"></p-dropdown>
+
+                                        <div *ngIf="submittedBasic && a.district_id.errors" class="invalid-feedback">
+                                            <small *ngIf="a.district_id.errors.required" class="p-error">District is required</small>
+                                        </div>
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="City/Town" tooltipPosition="top">City/Town </label>
+                                        <input type="text" formControlName="ps_area" placeholder="" pInputText />
+                                    </div>
+
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Post Code" tooltipPosition="top">Post Code </label>
+                                        <input type="text" formControlName="post_code" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Block" tooltipPosition="top">Block </label>
+                                        <input type="text" formControlName="block" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Road No" tooltipPosition="top">Road No </label>
+                                        <input type="text" formControlName="road_no" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="House No" tooltipPosition="top">House No </label>
+                                        <input type="text" formControlName="house_no" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Flat No" tooltipPosition="top">Flat No </label>
+                                        <input type="text" formControlName="flat_no" placeholder="" pInputText />
+                                    </div>
+
+                                    <div class="field form-group col-12 md:col-6">
+                                        <label pTooltip="Email" tooltipPosition="top">Email<span class="req">*</span> </label>
+                                        <input type="text" class="from-control" formControlName="email"
+                                               [ngClass]="{ 'is-invalid': submittedBasic && a.email.errors }"
+                                               placeholder="" pInputText required />
+                                        <div *ngIf="submittedBasic && a.email.errors" class="invalid-feedback">
+                                            <small *ngIf="a.email.errors.required" class="p-error">Email is required</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="field form-group col-12 md:col-6">
+                                        <label pTooltip="Mobile No" tooltipPosition="top">Mobile No<span class="req">*</span> </label>
+                                        <input type="text" class="from-control" formControlName="mobile_no"
+                                               [ngClass]="{ 'is-invalid': submittedBasic && a.mobile_no.errors }"
+                                               placeholder="" pInputText required />
+                                        <div *ngIf="submittedBasic && a.mobile_no.errors" class="invalid-feedback">
+                                            <small *ngIf="a.mobile_no.errors.required" class="p-error">Mobile No is required</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Phone No" tooltipPosition="top">Phone No </label>
+                                        <input type="text" formControlName="phone_no" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="PABX" tooltipPosition="top">PABX </label>
+                                        <input type="text" formControlName="pabx" placeholder="" pInputText />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="flex justify-content-end pr-2">
+                            <!--<button pButton pRipple type="button" (click)="onFormSubmit()" label="Save as Draft" class="risBtn risSave mr-2 mb-2" icon="pi pi-check"></button>-->
+                            <button pButton pRipple type="button" (click)="toggleFormClose()" label="Close" class="risBtn risClose mr-2 mb-2" icon="pi pi-times"></button>
+                            <button pButton pRipple type="button" (click)="openBasicNext()" label="Next" class="risBtn  mr-2 mb-2" icon="pi pi-step-forward"></button>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Business Info">
+                        <form action="" [formGroup]="businessApplicationForm">
+                            <div class="col-12">
+                                <div class="p-fluid p-formgrid grid">
+
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Business Activities" tooltipPosition="top">Business Activities<span class="req">*</span></label>
+                                        <p-dropdown [options]="allBusinessActivities" formControlName="business_activities_enum_id"
+                                                    [ngClass]="{ 'is-invalid': submittedBusiness && b.business_activities_enum_id.errors }" placeholder="---Select---"
+                                                    optionLabel="business_activities_enum_name" optionValue="business_activities_enum_id" [showClear]="true" [filter]="true" filterBy="business_activities_enum_name"></p-dropdown>
+
+                                        <div *ngIf="submittedBusiness && b.business_activities_enum_id.errors" class="invalid-feedback">
+                                            <small *ngIf="b.business_activities_enum_id.errors.required" class="p-error">Business Activities is required</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6">
+
+                                    </div>
+                                    <div class="field col-12 md:col-12 pl-0 pr-3">
+                                        <p-table [value]="subSectorDataSources" styleClass="p-datatable-striped p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll">
+                                            <ng-template pTemplate="header">
+                                                <tr>
+                                                    <th>#SL</th>
+                                                    <th>Sector</th>
+                                                    <th>Sub Sector</th>
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="body" let-rowIndex="rowIndex" let-subSector>
+
+                                                <tr>
+                                                    <td>{{rowIndex+1}}</td>
+                                                    <td>{{subSector.industry_sector_name}}</td>
+                                                    <td>{{subSector.industry_sub_sector_name}}</td>
+
+                                                </tr>
+                                            </ng-template>
+                                        </p-table>
+                                    </div>
+
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Management Staff" tooltipPosition="top">Management Staff </label>
+                                        <input type="text" formControlName="management_staff_no" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Non Management Staff" tooltipPosition="top">Non Management Staff </label>
+                                        <input type="text" formControlName="nonmanagement_staff_no" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Permanent Worker" tooltipPosition="top">Permanent Worker </label>
+                                        <input type="text" formControlName="permanent_worker_no" placeholder="" pInputText />
+                                    </div>
+                                    <div class="field col-12 md:col-6">
+                                        <label pTooltip="Casual Worker" tooltipPosition="top">Casual Worker </label>
+                                        <input type="text" formControlName="casual_worker_no" placeholder="" pInputText />
+                                    </div>
+
+                                    <div class="field col-12 md:col-12">
+                                        <label pTooltip="Casual Worker" tooltipPosition="top">Peer Platforms </label>
+                                        <div class=" row flex text-center p-fluid">
+                                            <div *ngFor="let category of categories;let i = index" class="p-field-checkbox text-start row flex flex-row flex-nowrap">
+                                                <p-checkbox name="group[i]" value="category" binary="true" [value]="category" (onChange)="onCheckboxChange($event,category.id,category.name)" formControlName="ecommerce_platforms_id" [inputId]="category.id"></p-checkbox>
+                                                <label [for]="category.id" class="ml-1" style="margin-right: 40px!important;">{{category.name}}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="flex justify-content-end pr-2">
+                            <button pButton pRipple type="button" (click)="openPrev()" label="Previous" class="risBtn  mr-2 mb-2" icon="pi pi-step-backward"></button>
+                            <!--<button pButton pRipple type="button" (click)="onBusinessFormSubmit()" label="Save as Draft" class="risBtn risSave mr-2 mb-2" icon="pi pi-check"></button>-->
+                            <button pButton pRipple type="button" (click)="toggleFormClose()" label="Close" class="risBtn risClose mr-2 mb-2" icon="pi pi-times"></button>
+                            <button pButton pRipple type="button" (click)="openBusinessNext()" label="Next" class="risBtn  mr-2 mb-2" icon="pi pi-step-forward"></button>
+                        </div>
+
+                    </p-tabPanel>
+                    <p-tabPanel header="Associations">
+                        <form action="" [formGroup]="associationsApplicationForm">
+                            <div class="col-12">
+                                <div class="p-fluid p-formgrid grid">
+                                    <div class="field col-12 md:col-12 pl-0 pr-3">
+                                        <p-table [value]="associationDataSources" styleClass="p-datatable-striped p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll">
+                                            <ng-template pTemplate="header">
+                                                <tr>
+                                                    <th>#SL</th>
+                                                    <th>Association Name</th>
+                                                    <th>Membership Type</th>
+                                                    <th>Number</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="body" let-rowIndex="rowIndex" let-association>
+                                                <tr>
+                                                    <td>{{rowIndex+1}}</td>
+                                                    <td>{{association.association_name}}</td>
+                                                    <td>{{association.membership_type_enum_name}}</td>
+                                                    <td>{{association.association_number}}</td>
+                                                    <td>{{association.start_date_str}}</td>
+
+                                                </tr>
+                                            </ng-template>
+                                        </p-table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                        <div class="flex justify-content-end pr-2">
+                            <button pButton pRipple type="button" (click)="openPrev()" label="Previous" class="risBtn  mr-2 mb-2" icon="pi pi-step-backward"></button>
+                            <button pButton pRipple type="button" (click)="toggleFormClose()" label="Close" class="risBtn risClose mr-2 mb-2" icon="pi pi-times"></button>
+                            <button pButton pRipple type="button" (click)="openNext()" label="Next" class="risBtn  mr-2 mb-2" icon="pi pi-step-forward"></button>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Legal Forms">
+                        <form action="" [formGroup]="legalDocumentApplicationForm">
+
+                            <div class="col-12">
+                                <div class="p-fluid p-formgrid grid">
+                                    <div class="field col-12 md:col-12 pl-0 pr-3">
+                                        <p-table [value]="documentDataSources" styleClass="p-datatable-striped p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll">
+                                            <ng-template pTemplate="header">
+                                                <tr>
+                                                    <th>#SL</th>
+                                                    <th>Document Name</th>
+                                                    <th>Document Number</th>
+                                                    <th>Issue Date</th>
+                                                    <th>Expiry Date</th>
+                                                    <th>File Name</th>
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="body" let-rowIndex="rowIndex" let-document>
+                                                <tr>
+                                                    <td>{{rowIndex+1}}</td>
+                                                    <td>{{document.document_type_name}}</td>
+                                                    <td>{{document.document_number}}</td>
+                                                    <td>{{document.issue_date_str}}</td>
+                                                    <td>{{document.expiry_date_str}}</td>
+                                                    <td>{{document.file_path}}</td>
+                                                </tr>
+                                            </ng-template>
+                                        </p-table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                        <div class="flex justify-content-end pr-2">
+                            <button pButton pRipple type="button" (click)="openPrev()" label="Previous" class="risBtn  mr-2 mb-2" icon="pi pi-step-backward"></button>
+                            <button pButton pRipple type="button" (click)="toggleFormClose()" label="Close" class="risBtn risClose mr-2 mb-2" icon="pi pi-times"></button>
+                            <button pButton pRipple type="button" (click)="openNext()" label="Next" class="risBtn  mr-2 mb-2" icon="pi pi-step-forward"></button>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Location Info">
+                        <p-fieldset legend="Add-Location" [collapsed]="collapsedLocationInfo" (onBeforeToggle)="toggle()" [toggleable]="true">
+                            <p-dialog header="Delete Record" [(visible)]="display" [style]="{width: '35vw'}">
+                                <p>Do you want to delete this record?</p>
+                                <ng-template pTemplate="footer">
+                                    <button class="pi pi-times risBtn risClose" (click)="display=false"> No</button>
+                                    <button class="pi pi-check risBtn risSave" (click)="deleteLocation()"> Yes</button>
+                                </ng-template>
+                            </p-dialog>
+                            <form action="" [formGroup]="locationApplicationForm">
+                                <div class="col-12">
+                                    <div class="p-fluid p-formgrid grid">
+
+                                        <div class="field col-12 md:col-12">
+                                            <p-table [value]="locationDataSources" styleClass="p-datatable-sm" class="p-0" responsiveLayout="scroll">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                        <th>#SL</th>
+                                                        <th>Location Type</th>
+                                                        <th>Location Name</th>
+                                                        <th>Country</th>
+                                                        <th>Division</th>
+                                                        <th>District</th>
+                                                        <th>Address</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-rowIndex="rowIndex" let-location>
+
+                                                    <tr>
+                                                        <td>{{rowIndex+1}}</td>
+                                                        <td>{{location.location_type_name}}</td>
+                                                        <td>{{location.supplier_location_name}}</td>
+                                                        <td>{{location.country_name}}</td>
+                                                        <td>{{location.division_name}}</td>
+                                                        <td>{{location.district_name}}</td>
+                                                        <td>{{location.Address}}</td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </form>
+                        </p-fieldset>
+
+                        <p-fieldset legend="Add-Warehouse" [collapsed]="collapsedWarehouseInfo" (onBeforeToggle)="toggle()" [toggleable]="true">
+                            <p-dialog header="Delete Record" [(visible)]="display" [style]="{width: '35vw'}">
+                                <p>Do you want to delete this record?</p>
+                                <ng-template pTemplate="footer">
+                                    <button class="pi pi-times risBtn risClose" (click)="display=false"> No</button>
+                                    <button class="pi pi-check risBtn risSave" (click)="deleteLocation()"> Yes</button>
+                                </ng-template>
+                            </p-dialog>
+                            <form action="" [formGroup]="warehouseApplicationForm">
+                                <div class="col-12">
+                                    <div class="p-fluid p-formgrid grid">
+                                        <div class="field col-12 md:col-12 pl-0 pr-3">
+                                            <p-table [value]="warehouseDataSources" styleClass="p-datatable-sm" class="p-0" responsiveLayout="scroll">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                        <th>#SL</th>
+                                                        <th>Location</th>
+                                                        <th>Warehouse Name</th>
+                                                        <th>Note</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-rowIndex="rowIndex" let-warehouse>
+                                                    <tr>
+                                                        <td>{{rowIndex+1}}</td>
+                                                        <td>{{warehouse.supplier_location_type_name}}</td>
+                                                        <td>{{warehouse.supplier_warehouse_name}}</td>
+                                                        <td>{{warehouse.add_note}}</td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </p-fieldset>
+                        <div class="flex justify-content-end pl-0 pr-3">
+                            <button pButton pRipple type="button" (click)="openPrev()" label="Previous" class="risBtn  mr-2 mb-2" icon="pi pi-step-backward"></button>
+                            <button pButton pRipple type="button" (click)="toggleFormClose()" label="Close" class="risBtn risClose mr-2 mb-2" icon="pi pi-times"></button>
+                            <button pButton pRipple type="button" (click)="openNext()" label="Next" class="risBtn  mr-2 mb-2" icon="pi pi-step-forward"></button>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Contact Info">
+                        <p-fieldset legend="Add-Contact" [collapsed]="collapsedContactInfo" (onBeforeToggle)="toggleContact()" [toggleable]="true">
+                            <p-dialog header="Delete Record" [(visible)]="display" [style]="{width: '35vw'}">
+                                <p>Do you want to delete this record?</p>
+                                <ng-template pTemplate="footer">
+                                    <button class="pi pi-times risBtn risClose" (click)="display=false"> No</button>
+                                    <button class="pi pi-check risBtn risSave" (click)="deleteLocation()"> Yes</button>
+                                </ng-template>
+                            </p-dialog>
+                            <form action="" [formGroup]="contactApplicationForm">
+                                <div class="col-12">
+                                    <div class="p-fluid p-formgrid grid">
+                                        <div class="field col-12 md:col-12">
+                                            <p-table [value]="contactDataSources" styleClass="p-datatable-sm" class="p-0" responsiveLayout="scroll">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                        <th>#SL</th>
+                                                        <th>Contact Person</th>
+                                                        <th>Contact Type</th>
+                                                        <th>Designation</th>
+                                                        <th>Nationality</th>
+                                                        <th>DOB</th>
+                                                        <th>Gender</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-rowIndex="rowIndex" let-contact>
+                                                    <tr>
+                                                        <td>{{rowIndex+1}}</td>
+                                                        <td>{{contact.contact_person_name}}</td>
+                                                        <td>{{contact.contact_type_name}}</td>
+                                                        <td>{{contact.designation_name}}</td>
+                                                        <td>{{contact.country_name}}</td>
+                                                        <td>{{contact.date_of_birth_str}}</td>
+                                                        <td>{{contact.gender_enum_name}}</td>
+                                                        <td> <button class="pi pi-times-circle risBtn risDelete" (click)="DeleteContactInfo(rowIndex,contact)"> </button></td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </p-fieldset>
+
+                        <p-fieldset legend="Add-Location wise Contact" [collapsed]="collapsedLocationWiseContactInfo" (onBeforeToggle)="toggleContact()" [toggleable]="true">
+                            <p-dialog header="Delete Record" [(visible)]="display" [style]="{width: '35vw'}">
+                                <p>Do you want to delete this record?</p>
+                                <ng-template pTemplate="footer">
+                                    <button class="pi pi-times risBtn risClose" (click)="display=false"> No</button>
+                                    <button class="pi pi-check risBtn risSave" (click)="deleteLocation()"> Yes</button>
+                                </ng-template>
+                            </p-dialog>
+                            <form action="" [formGroup]="ContactLocationApplicationForm">
+                                <div class="col-12">
+                                    <div class="p-fluid p-formgrid grid">
+                                        <div class="field col-12 md:col-12">
+                                            <p-table [value]="contactLocationDataSources" styleClass="p-datatable-sm" class="p-0" responsiveLayout="scroll">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                        <th>#SL</th>
+                                                        <th>Location</th>
+                                                        <th>Contact Person</th>
+                                                        <th>Note</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-rowIndex="rowIndex" let-contactLocation>
+
+                                                    <tr>
+                                                        <td>{{rowIndex+1}}</td>
+                                                        <td>{{contactLocation.supplier_location_name}}</td>
+                                                        <td>{{contactLocation.contact_person_name}}</td>
+                                                        <td>{{contactLocation.add_note}}</td>
+                                                        <td> <button class="pi pi-times-circle risBtn risDelete" (click)="deleteContactLocationInfo(rowIndex,contactLocation)"> </button></td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </p-fieldset>
+                        <div class="flex justify-content-end pr-2">
+
+                            <button pButton pRipple type="button" (click)="openPrev()" label="Previous" class="risBtn  mr-2 mb-2" icon="pi pi-step-backward"></button>
+                            <button pButton pRipple type="button" (click)="toggleFormClose()" label="Close" class="risBtn risClose mr-2 mb-2" icon="pi pi-times"></button>
+                            <button pButton pRipple type="button" (click)="openNext()" label="Next" class="risBtn  mr-2 mb-2" icon="pi pi-step-forward"></button>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Financial Info">
+                        <p-fieldset legend="Security Deposit" [collapsed]="collapsedSecurityDepositInfo" (onBeforeToggle)="toggleFinancialInfo()" [toggleable]="true">
+                            <p-dialog header="Delete Record" [(visible)]="display" [style]="{width: '35vw'}">
+                                <p>Do you want to delete this record?</p>
+                                <ng-template pTemplate="footer">
+                                    <button class="pi pi-times risBtn risClose" (click)="display=false"> No</button>
+                                    <button class="pi pi-check risBtn risSave" (click)="deleteLocation()"> Yes</button>
+                                </ng-template>
+                            </p-dialog>
+                            <form action="" [formGroup]="financialApplicationForm">
+                                <div class="col-12">
+                                    <div class="p-fluid p-formgrid grid">
+
+                                        <div class="field col-12 md:col-6">
+                                            <label pTooltip="Currency" tooltipPosition="top">Currency<span class="req">*</span></label>
+                                            <p-dropdown [options]="allCurrency" formControlName="currency_id"
+                                                        [ngClass]="{ 'is-invalid': submittedFinancial && i.currency_id.errors }" placeholder="---Select---"
+                                                        optionLabel="currency_name" optionValue="currency_id" [showClear]="true" [filter]="true" filterBy="currency_name"></p-dropdown>
+
+                                            <div *ngIf="submittedFinancial && i.currency_id.errors" class="invalid-feedback">
+                                                <small *ngIf="i.currency_id.errors.required" class="p-error">Currency is required</small>
+                                            </div>
+                                        </div>
+
+                                        <div class="field form-group col-12 md:col-6">
+                                            <label pTooltip="Credit Days" tooltipPosition="top">Credit Days<span class="req">*</span> </label>
+                                            <input type="text" class="from-control" formControlName="credit_days"
+                                                   [ngClass]="{ 'is-invalid': submittedFinancial && i.credit_days.errors }"
+                                                   placeholder="" pInputText required />
+
+                                            <div *ngIf="submittedFinancial && i.credit_days.errors" class="invalid-feedback">
+                                                <small *ngIf="i.credit_days.errors.required" class="p-error">Credit Days is required</small>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="field form-group col-12 md:col-6">
+                                            <label pTooltip="Credit Limit" tooltipPosition="top">Credit Limit<span class="req">*</span> </label>
+                                            <input type="text" class="from-control" formControlName="credit_limit"
+                                                   [ngClass]="{ 'is-invalid': submittedFinancial && i.credit_limit.errors }"
+                                                   placeholder="" pInputText required />
+
+                                            <div *ngIf="submittedFinancial && i.credit_limit.errors" class="invalid-feedback">
+                                                <small *ngIf="i.credit_limit.errors.required" class="p-error">Credit Limit is required</small>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label pTooltip="Payment Frequency" tooltipPosition="top">Payment Frequency<span class="req">*</span></label>
+                                            <p-dropdown [options]="allPaymentFrequency" formControlName="payment_frequency_id"
+                                                        [ngClass]="{ 'is-invalid': submittedFinancial && i.payment_frequency_id.errors }" placeholder="---Select---"
+                                                        optionLabel="payment_frequency_name" optionValue="payment_frequency_id" [showClear]="true" [filter]="true" filterBy="payment_frequency_name"></p-dropdown>
+
+                                            <div *ngIf="submittedFinancial && i.payment_frequency_id.errors" class="invalid-feedback">
+                                                <small *ngIf="i.payment_frequency_id.errors.required" class="p-error">Payment Frequency is required</small>
+                                            </div>
+                                        </div>
+
+                                        <!--[(ngModel)]="checked"-->
+                                        <p style="border-top:2px solid blue; width: 100%; margin:20px 0px 10px 0px;"></p>
+
+                                        <div class="field col-12 md:col-12 pl-0 pr-3">
+                                            <p-table [value]="SecurityDepositDataSources" styleClass="p-datatable-striped p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                        <th>#SL</th>
+                                                        <th>Security Deposit</th>
+                                                        <th>Security Amount</th>
+                                                        <th>Expiry Date</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-rowIndex="rowIndex" let-securitydeposit>
+                                                    <tr>
+                                                        <td>{{rowIndex+1}}</td>
+                                                        <td>{{securitydeposit.security_deposit_name}}</td>
+                                                        <td>{{securitydeposit.security_amount}}</td>
+                                                        <td>{{securitydeposit.expiry_date_str}}</td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </p-fieldset>
+
+                        <p-fieldset legend="Add-Mobile Banking" [collapsed]="collapsedMobileBankingInfo" (onBeforeToggle)="toggleFinancialInfo()" [toggleable]="true">
+                            <p-dialog header="Delete Record" [(visible)]="display" [style]="{width: '35vw'}">
+                                <p>Do you want to delete this record?</p>
+                                <ng-template pTemplate="footer">
+                                    <button class="pi pi-times risBtn risClose" (click)="display=false"> No</button>
+                                    <button class="pi pi-check risBtn risSave" (click)="deleteLocation()"> Yes</button>
+                                </ng-template>
+                            </p-dialog>
+                            <form action="" [formGroup]="mobileBankingApplicationForm">
+                                <div class="col-12">
+                                    <div class="p-fluid p-formgrid grid">
+                                        <div class="field col-12 md:col-12 pl-0 pr-3">
+                                            <p-table [value]="mobileBankingDataSources" styleClass="p-datatable-striped p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                        <th>#SL</th>
+                                                        <th>MFS Name</th>
+                                                        <th>A/C Number</th>
+                                                        <th>MFS Type</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-rowIndex="rowIndex" let-mobilebanking>
+                                                    <tr>
+                                                        <td>{{rowIndex+1}}</td>
+                                                        <td>{{mobilebanking.mfs_name}}</td>
+                                                        <td>{{mobilebanking.account_number}}</td>
+                                                        <td>{{mobilebanking.mfs_type_name}}</td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </p-fieldset>
+
+                        <p-fieldset legend="Add-Bank Account" [collapsed]="collapsedBankingInfo" (onBeforeToggle)="toggleFinancialInfo()" [toggleable]="true">
+                            <p-dialog header="Submit Information" [(visible)]="displaySubmit" [style]="{width: '35vw'}">
+                                <p>Do you want to submit this supplier information?</p>
+                                <ng-template pTemplate="footer">
+                                    <button class="pi pi-times risBtn risClose" (click)="displaySubmit=false"> No</button>
+                                    <button class="pi pi-check risBtn risSave" (click)="submitSupplierInfo()"> Yes</button>
+                                </ng-template>
+                            </p-dialog>
+                            <form action="" [formGroup]="bankingApplicationForm">
+                                <div class="col-12">
+                                    <div class="p-fluid p-formgrid grid">
+                                        <div class="field col-12 md:col-12 pl-0 pr-3">
+                                            <p-table [value]="bankingDataSources" styleClass="p-datatable-striped p-datatable-gridlines p-datatable-sm" responsiveLayout="scroll">
+                                                <ng-template pTemplate="header">
+                                                    <tr>
+                                                        <th>#SL</th>
+                                                        <th>Bank Type</th>
+                                                        <th>Bank Name</th>
+                                                        <th>Branch Name</th>
+                                                        <th>Account Name</th>
+                                                        <th>Account Number</th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-rowIndex="rowIndex" let-banking>
+                                                    <tr>
+                                                        <td>{{rowIndex+1}}</td>
+                                                        <td>{{banking.bank_type_name}}</td>
+                                                        <td>{{banking.bank_name}}</td>
+                                                        <td>{{banking.bank_branch_name}}</td>
+                                                        <td>{{banking.account_name}}</td>
+                                                        <td> <button class="pi pi-times-circle risBtn risDelete" (click)="deleteBankAccount(rowIndex,banking)"> </button></td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </p-fieldset>
+
+
+
+                        <div class="flex justify-content-end pr-2">
+
+                            <button pButton pRipple type="button" (click)="openPrev()" label="Previous" class="risBtn  mr-2 mb-2" icon="pi pi-step-backward"></button>
+                            <button pButton pRipple type="button" (click)="toggleFormClose()" label="Close" class="risBtn risClose mr-2 mb-2" icon="pi pi-times"></button>
+
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Assessment">
+                        <!--<form action="" [formGroup]="assessmentScoreForm">-->
+                        <div class="col-12">
+                            <div class="p-fluid p-formgrid grid">
+                                <div class="p-fluid grid col-12 flex justify-content-start flex-wrap card-container">
+                                    <p-table [value]="criterias" dataKey="assessment_criteria_id" editMode="row">
+                                        <ng-template pTemplate="header">
+                                            <tr>
+                                                <th>SL.</th>
+                                                <th>Consideration of Criteria</th>
+                                                <th>Manual  Weight</th>
+                                                <th>Actual Score</th>
+                                                <th>Comments</th>
+                                                <th style="width:8rem"></th>
+                                            </tr>
+                                        </ng-template>
+                                        <ng-template pTemplate="body" let-criteria let-editing="editing" let-ri="rowIndex">
+                                            <tr [pEditableRow]="criteria">
+                                                <td>{{criteria.assessment_criteria_id}}</td>
+                                                <td>{{criteria.assessment_criteria_name}}</td>
+                                                <td pEditableColumn>
+                                                    <p-cellEditor>
+                                                        <ng-template pTemplate="input">
+                                                            <input pInputText type="number" [(ngModel)]="criteria.manual_weight" required>
+                                                        </ng-template>
+                                                        <ng-template pTemplate="output">
+                                                            {{criteria.manual_weight}}
+                                                        </ng-template>
+                                                    </p-cellEditor>
+                                                </td>
+                                                <td pEditableColumn>
+                                                    <p-cellEditor>
+                                                        <ng-template pTemplate="input">
+                                                            <input pInputText type="number" [(ngModel)]="criteria.actual_weight" required>
+                                                        </ng-template>
+                                                        <!--<ng-template pTemplate="output">
+                                                            {{criteria.actual_weight}}
+                                                        </ng-template>-->
+                                                    </p-cellEditor>
+                                                </td>
+                                                <td pEditableColumn>
+                                                    <p-cellEditor>
+                                                        <ng-template pTemplate="input">
+                                                            <input pInputText type="text" [(ngModel)]="criteria.comments" required>
+                                                        </ng-template>
+                                                        <ng-template pTemplate="output">
+                                                            {{criteria.comments}}
+                                                        </ng-template>
+                                                    </p-cellEditor>
+
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(criteria)" class="p-button-rounded p-button-text"></button>
+                                                    <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(criteria)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                                                    <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(criteria, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                                                </td>
+                                            </tr>
+                                        </ng-template>
+                                    </p-table>
+                                </div>
+                                <!--<div class="p-fluid grid col-6 flex justify-content-end flex-wrap card-container">
+                                    <div class="col-4 mt-2 text-right">
+                                        <label for="" class=" d-md-inline-flex">Comment</label>
+                                    </div>
+                                    <div class="col-8 p-fluid text-right">
+                                        <input id="float-input p-fluid" type="text" formControlName="comment" placeholder="Please comment here" pInputText autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid grid col-6 flex justify-content-end flex-wrap card-container">
+                                    <div class="col-4 mt-2 text-right">
+                                        <label for="" class=" d-md-inline-flex">Suggestion</label>
+                                    </div>
+                                    <div class="col-8 p-fluid text-right">
+                                        <input id="float-input p-fluid" type="text" formControlName="suggestion" placeholder="Please suggestion here" pInputText autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <div class="p-fluid grid col-6 flex justify-content-end flex-wrap card-container">
+                                    <div class="col-4 mt-2 text-right">
+                                    </div>
+                                    <div class="col-8 p-fluid text-left">
+                                        <button type="submit" class="pi pi-times-circle risBtn risDelete mr-2" (click)="onFormReject()"> Reject</button>
+                                    </div>
+                                </div>
+                                <div class="p-fluid grid col-6 flex justify-content-end flex-wrap card-container">
+                                    <div class="col-4 mt-2 text-right">
+                                    </div>
+                                    <div class="col-8 p-fluid text-right">
+                                        <button type="submit" class="pi pi-save risBtn risAdd mr-2" (click)="onFormApprove()"> Approve</button>
+                                    </div>
+                                </div>-->
+
+
+                            </div>
+                        </div>
+                        <!--</form>-->
+                        <div class="flex justify-content-end pr-2">
+                            <div class="flex justify-content-end pr-2">
+                                <button pButton pRipple type="button" (click)="openPrev()" label="Previous" class="risBtn  mr-2 mb-2" icon="pi pi-step-backward"></button>
+                                <button pButton pRipple type="button" (click)="showSubmitDialog()" label="Submit" class="risBtn risView mr-2 mb-2" icon="pi pi-send"></button>
+                                <button pButton pRipple type="button" (click)="toggleFormClose()" label="Close" class="risBtn risClose mr-2 mb-2" icon="pi pi-times"></button>
+
+                            </div>
+                        </div>
+                    </p-tabPanel>
+                </p-tabView>
+            </div>
+
+
+
+            <!--end form display------------->
+
+            <div [hidden]="gridDisplay">
+
+                <p-table #dt1 [value]="supplierinfoList" styleClass="p-datatable-striped p-datatable-gridlines p-datatable-sm" [paginator]="true" [rows]="10" selectionMode="single" [showCurrentPageReport]="true" responsiveLayout="scroll"
+                         [(selection)]="selectedsupplierinfo" dataKey="SupplierId" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+                         [globalFilterFields]="['SupplierCode','LegalName']">
+                    <ng-template pTemplate="caption">
+                        <div class="flex">
+                            <span class="p-input-icon-left ml-auto">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search by Any" />
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="Code">
+                                Supplier Code
+                                <p-columnFilter type="text" field="SupplierCode" display="menu"></p-columnFilter>
+                                <p-sortIcon field="Code"></p-sortIcon>
+                            </th>
+                            <th pSortableColumn="LegalName">
+                                Supplier Name
+                                <p-columnFilter type="text" field="LegalName" display="menu"></p-columnFilter>
+                            </th>
+                            <th pSortableColumn="DealerinfoName">
+                                Mobile
+                                <p-columnFilter type="text" field="DealerinfoName" display="menu"></p-columnFilter>
+                            </th>
+                            <th pSortableColumn="PersonalPhone">Department</th>
+                            <th pSortableColumn="PersonalPhone">Assign Person</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-supplierinfo let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="supplierinfo">
+                            <td>{{supplierinfo.SupplierId}}</td>
+                            <td>{{supplierinfo.SupplierName}}</td>
+                            <td>{{supplierinfo.Mobile}}</td>
+                            <td>{{supplierinfo.DepartmentName}}</td>
+                            <td>{{supplierinfo.EmployeeName}}</td>
+                            <td class="text-orange-400" *ngIf="!supplierinfo.is_verified">{{"Pending Assessment"}}</td>
+                            <td>
+                                <button class="pi pi-pencil risBtn risView mr-2" (click)="viewSupplierinfo(rowIndex,supplierinfo)"> View </button>
+                                <button class="pi pi-plus risBtn risAdd mr-2" (click)="showBasicDialog()"> Assessment </button>
+                            </td>
+
+
+
+                            <!--<td class="text-orange-400" *ngIf="!supplierinfo.is_verified">{{"Pending Assessment"}}</td>
+                            <td> <button class="pi pi-pencil risBtn risView mr-2" (click)="viewDealerinfo(rowIndex,supplierinfo)"> View </button></td>-->
+
+                            <!--<td> <button class="pi pi-pencil risBtn risView mr-2" (click)="viewDocumentinfo(rowIndex,supplierinfo)"> View </button></td>-->
+                        </tr>
+                    </ng-template>
+                </p-table>
+
+                <!--end grid display -------------->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

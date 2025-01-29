@@ -1,0 +1,101 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card">
+            <h4>Association</h4>
+            <div [hidden]="formDisplay">
+                <form action="" [formGroup]="associationForm">
+                    <div class="col-12">
+                        <div class="p-fluid p-formgrid grid">
+
+                            <div class="field col-12 md:col-6">
+                                <label pTooltip="Country" tooltipPosition="top">Country<span class="req">*</span></label>
+                                <p-dropdown [options]="allCountry" formControlName="country_id"
+                                            [ngClass]="{ 'is-invalid': submitted && f.country_id.errors }" placeholder="---Select---"
+                                            optionLabel="country_name" optionValue="country_id" [showClear]="true" [filter]="true" filterBy="country_name"></p-dropdown>
+
+                                <div *ngIf="submitted && f.country_id.errors" class="invalid-feedback">
+                                    <small *ngIf="f.country_id.errors.required" class="p-error">Country</small>
+                                </div>
+                            </div>
+
+                            <div class="field col-12 md:col-6">
+                                <label pTooltip="Organization Type" tooltipPosition="top">Organization Type<span class="req">*</span></label>
+                                <p-dropdown [options]="allOrganizationType" formControlName="organization_type_id_enum"
+                                            [ngClass]="{ 'is-invalid': submitted && f.organization_type_id_enum.errors }" placeholder="---Select---"
+                                            optionLabel="organization_type_name_enum" optionValue="organization_type_id_enum" [showClear]="true" [filter]="true" filterBy="organization_type_name_enum"></p-dropdown>
+
+                                <div *ngIf="submitted && f.organization_type_id_enum.errors" class="invalid-feedback">
+                                    <small *ngIf="f.organization_type_id_enum.errors.required" class="p-error">Organization Type</small>
+                                </div>
+                            </div>
+
+                            <div class="field form-group col-12 md:col-6">
+                                <label pTooltip="Association Name" tooltipPosition="top">Association Name<span class="req">*</span> </label>
+                                <input id="lastname2" type="text" class="from-control" formControlName="association_name"
+                                       [ngClass]="{ 'is-invalid': submitted && f.association_name.errors }"
+                                       placeholder="" pInputText required />
+
+                                <div *ngIf="submitted && f.association_name.errors" class="invalid-feedback">
+                                    <small *ngIf="f.association_name.errors.required" class="p-error">Association Name is required</small>
+
+                                </div>
+                            </div>
+
+
+                            <div class="field col-12 md:col-6">
+                                <label>abbreviation </label>
+                                <input id="lastname2" type="text" formControlName="abbreviation" placeholder="" pInputText />
+                            </div>
+
+                            <div class="field col-12 md:col-6">
+                                <label>Remarks </label>
+                                <input id="lastname2" type="text" formControlName="remarks" placeholder="" pInputText />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-content-end pr-2">
+                        <button pButton pRipple type="button" (click)="onFormSubmit()" label="Save" class="risBtn risSave mr-2 mb-2" icon="pi pi-check"></button>
+                        <button pButton pRipple type="button" (click)="toggleFormClose()" label="Close" class="risBtn risClose mr-2 mb-2" icon="pi pi-times"></button>
+                    </div>
+
+                </form>
+            </div>
+
+            <!--end form display------------->
+
+            <div [hidden]="gridDisplay">
+                <button pButton pRipple type="button" (click)="showBasicDialog()" label="New" icon="pi pi-plus" class="risBtn risAdd mr-2 mb-2"></button>
+                <button pButton pRipple type="button" (click)="loadassociationToEdit()" label="Edit" icon="pi pi-pencil" class="risBtn risEdit mr-2 mb-2"></button>
+                <button pButton pRipple type="button" label="Delete" icon="pi pi-trash" class="risBtn risDelete mr-2 mb-2" (click)="deleteModal($event)"> </button>
+                <p-confirmPopup key="delete"></p-confirmPopup>
+
+
+                <p-table [value]="associations" styleClass="p-datatable-striped p-datatable-gridlines p-datatable-sm" [paginator]="true" [rows]="10" selectionMode="single" [showCurrentPageReport]="true" responsiveLayout="scroll"
+                         [(selection)]="selectedAssociation" dataKey="association_id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Association Name</th>
+                            <th>Abbreviation</th>
+                            <th>Country</th>
+                            <th>Organization Type</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-association>
+                        <tr [pSelectableRow]="association">
+                            <td>{{association.association_name}}</td>
+                            <td>{{association.abbreviation}}</td>
+                            <td>{{association.country_name}}</td>
+                            <td>{{association.organization_type_name_enum}}</td>
+                            <td>{{association.remarks}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <!--end grid display -------------->
+            </div>
+        </div>
+    </div>
+</div>
+
+

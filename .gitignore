@@ -1,0 +1,9 @@
+/Auth/bin
+/Auth/obj
+obj
+/.vs
+/WebApp/.angular/cache/babel-webpack
+/WebApp/.angular/cache/angular-webpack
+
+
+/WebApp/node_modules/.staging
